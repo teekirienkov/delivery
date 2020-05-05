@@ -66,9 +66,18 @@ function notAuthorized() {
     checkAuth();
   }
 
+  function checkLengthLogin(event) {
+    if (loginInput.value) {
+      logIn()
+    } else {
+      event.preventDefault();
+      alert('Введите логин!');
+    }
+  }
+
   buttonAuth.addEventListener('click', toggleModalAuth);
   closeAuth.addEventListener('click', toggleModalAuth);
-  logInForm.addEventListener('submit', logIn);
+  logInForm.addEventListener('submit', checkLengthLogin);
 }
 
 function checkAuth() {
