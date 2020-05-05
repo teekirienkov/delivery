@@ -21,7 +21,7 @@ const buttonAuth = document.querySelector('.button-auth'),
       userName = document.querySelector('.user-name'),
       buttonOut = document.querySelector('.button-out');
 
-let login = ''; // пустая строка для проверки
+let login = localStorage.getItem('login');
 
 function toggleModalAuth() {
   modalAuth.classList.toggle('is-open');
@@ -30,17 +30,19 @@ function toggleModalAuth() {
 function authorized() {
   console.log('Auth');
   buttonAuth.style.display = 'none';
-
-  userName.textContent = login;
-
   userName.style.display = 'inline';
   buttonOut.style.display = 'block';
 
+  userName.textContent = login;
+
   function exit() {
-    login = '';
+    login = null;
+    localStorage.removeItem('login'); // выход и удаление из ls
+
     buttonAuth.style.display = '';
     userName.style.display = '';
     buttonOut.style.display = '';
+    buttonOut.removeEventListener('click', exit)
     checkAuth();
   }
   buttonOut.addEventListener('click', exit)
@@ -50,13 +52,17 @@ function notAuthorized() {
   console.log('No auth')
 // тут сделать проверку на пустой логин
   function logIn(event) {
-    event.preventDefault();
     login = loginInput.value;
+    localStorage.setItem('login', login);
+
+    event.preventDefault();
+    
     toggleModalAuth();
     // Удаляем обработчики событий для корректной работы
     buttonAuth.removeEventListener('click', toggleModalAuth);
     closeAuth.removeEventListener('click', toggleModalAuth);
     logInForm.removeEventListener('submit', logIn);
+    logInForm.reset();
     checkAuth();
   }
 
