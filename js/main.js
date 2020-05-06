@@ -2,15 +2,6 @@ const cartButton = document.querySelector("#cart-button"),
       modal = document.querySelector(".modal"),
       close = document.querySelector(".close");
 
-cartButton.addEventListener("click", toggleModal);
-close.addEventListener("click", toggleModal);
-
-function toggleModal() {
-  modal.classList.toggle("is-open");
-}
-
-
-
 const buttonAuth = document.querySelector('.button-auth'),
       modalAuth = document.querySelector('.modal-auth'),
       closeAuth = document.querySelector('.close-auth'),
@@ -30,14 +21,11 @@ const buttonAuth = document.querySelector('.button-auth'),
 
       cardsMenu = document.querySelector('.cards-menu');
 
-
-logo.addEventListener('click', function() {
-  containerPromo.classList.remove('hide');
-  restaurants.classList.remove('hide');
-  menu.classList.add('hide');
-})
-
 let login = localStorage.getItem('login');
+
+function toggleModal() {
+  modal.classList.toggle("is-open");
+}
 
 function toggleModalAuth() {
   modalAuth.classList.toggle('is-open');
@@ -164,7 +152,7 @@ function openGoods(event) {
 
   if (restaurant) {
     cardsMenu.textContent = '';
-    
+
     containerPromo.classList.add('hide');
     restaurants.classList.add('hide');
     menu.classList.remove('hide');
@@ -175,3 +163,13 @@ function openGoods(event) {
 
 // Вешаем клик на весь блок с ресторанами, в функции openGoods делегирование события
 cardsRestaurants.addEventListener('click', openGoods);
+
+logo.addEventListener('click', function() {
+  containerPromo.classList.remove('hide');
+  restaurants.classList.remove('hide');
+  menu.classList.add('hide');
+})
+
+// Модальное окно
+cartButton.addEventListener("click", toggleModal);
+close.addEventListener("click", toggleModal);
