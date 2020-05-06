@@ -1,8 +1,8 @@
 const cartButton = document.querySelector("#cart-button"),
       modal = document.querySelector(".modal"),
-      close = document.querySelector(".close");
+      close = document.querySelector(".close"),
 
-const buttonAuth = document.querySelector('.button-auth'),
+      buttonAuth = document.querySelector('.button-auth'),
       modalAuth = document.querySelector('.modal-auth'),
       closeAuth = document.querySelector('.close-auth'),
       logInForm = document.querySelector('#logInForm'),
@@ -22,12 +22,6 @@ const buttonAuth = document.querySelector('.button-auth'),
       cardsMenu = document.querySelector('.cards-menu');
 
 let login = localStorage.getItem('login');
-
-const valid = function(str) {
-  const nameReg = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
-
-  return nameReg.test(str);
-}
 
 function toggleModal() {
   modal.classList.toggle("is-open");
@@ -52,8 +46,10 @@ function authorized() {
     buttonAuth.style.display = '';
     userName.style.display = '';
     buttonOut.style.display = '';
+
     buttonOut.removeEventListener('click', exit);
     checkAuth();
+    openMainPage();
   }
   buttonOut.addEventListener('click', exit);
 }
