@@ -21,7 +21,18 @@ const buttonAuth = document.querySelector('.button-auth'),
       userName = document.querySelector('.user-name'),
       buttonOut = document.querySelector('.button-out'),
 
-      cardsRestaurants = document.querySelector('.cards-restaurants');
+      cardsRestaurants = document.querySelector('.cards-restaurants'),
+
+      containerPromo = document.querySelector('.container-promo'),
+      restaurants = document.querySelector('.restaurants'),
+      menu = document.querySelector('.menu'),
+      logo = document.querySelector('.logo');
+
+logo.addEventListener('click', function() {
+  containerPromo.classList.remove('hide');
+  restaurants.classList.remove('hide');
+  menu.classList.add('hide');
+})
 
 let login = localStorage.getItem('login');
 
@@ -52,7 +63,7 @@ function authorized() {
 
 function notAuthorized() {
   console.log('No auth')
-// тут сделать проверку на пустой логин
+
   function logIn(event) {
     login = loginInput.value;
     localStorage.setItem('login', login);
@@ -94,16 +105,13 @@ checkAuth();
 
 function createCardRestaurant() {
   const card = `
-    <a href="restaurant.html" class="card card-restaurant">
-
+    <a href="#" class="card card-restaurant">
       <img src="img/tanuki/preview.jpg" alt="image" class="card-image"/>
       <div class="card-text">
-
         <div class="card-heading">
           <h3 class="card-title">Тануки</h3>
           <span class="card-tag tag">60 мин</span>
         </div>
-
         <div class="card-info">
           <div class="rating">
             4.5
@@ -111,12 +119,30 @@ function createCardRestaurant() {
           <div class="price">От 1 200 ₽</div>
           <div class="category">Суши, роллы</div>
         </div>
-
       </div>
     </a>`;
 
     // Этот метод работает быстрее чем innerHTML. Он не переписывает имеющуюся верстку
-    cardsRestaurants.insertAdjacentHTML()
+    cardsRestaurants.insertAdjacentHTML('afterbegin', card);
+}
+createCardRestaurant()
+
+function createCardGood() {
+  const card = document.createElement('section');
+  
 }
 
-createCardRestaurant()
+function openGoods(event) {
+  const target = event.target;
+
+  const restaurant = target.closest('.card-restaurant'); // получаем родительский элемент <a></a>
+
+  if (restaurant) {
+    containerPromo.classList.add('hide');
+    restaurants.classList.add('hide');
+    menu.classList.remove('hide');
+  }
+}
+
+// Вешаем клик на весь блок с ресторанами, в функции openGoods делегирование события
+cardsRestaurants.addEventListener('click', openGoods);
