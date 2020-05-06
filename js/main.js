@@ -58,10 +58,10 @@ function notAuthorized() {
   console.log('No auth');
 
   function logIn(event) {
+    // event.preventDefault(); - если написать без остановки, то в принципе работает
+
     login = loginInput.value;
     localStorage.setItem('login', login);
-
-    event.preventDefault();
     
     toggleModalAuth();
     // Удаляем обработчики событий для корректной работы
@@ -177,8 +177,8 @@ checkAuth();
 
 createCardRestaurant();
 createCardRestaurant();
+createCardRestaurant();
 
-// ошибка скорее всего в верстке
 new Swiper('.swiper-container', {
   loop: true,
   autoplay: true
