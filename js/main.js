@@ -9,7 +9,7 @@ function toggleModal() {
   modal.classList.toggle("is-open");
 }
 
-// day 1
+
 
 const buttonAuth = document.querySelector('.button-auth'),
       modalAuth = document.querySelector('.modal-auth'),
@@ -26,7 +26,10 @@ const buttonAuth = document.querySelector('.button-auth'),
       containerPromo = document.querySelector('.container-promo'),
       restaurants = document.querySelector('.restaurants'),
       menu = document.querySelector('.menu'),
-      logo = document.querySelector('.logo');
+      logo = document.querySelector('.logo'),
+
+      cardsMenu = document.querySelector('.cards-menu');
+
 
 logo.addEventListener('click', function() {
   containerPromo.classList.remove('hide');
@@ -123,13 +126,35 @@ function createCardRestaurant() {
     </a>`;
 
     // Этот метод работает быстрее чем innerHTML. Он не переписывает имеющуюся верстку
-    cardsRestaurants.insertAdjacentHTML('afterbegin', card);
+    cardsRestaurants.insertAdjacentHTML('beforeend', card);
 }
 createCardRestaurant()
 
 function createCardGood() {
-  const card = document.createElement('section');
-  
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  card.insertAdjacentHTML('beforeend', `
+      <img src="img/pizza-plus/pizza-classic.jpg" alt="image" class="card-image"/>
+      <div class="card-text">
+        <div class="card-heading">
+          <h3 class="card-title card-title-reg">Пицца Классика</h3>
+        </div>
+        <div class="card-info">
+          <div class="ingredients">Соус томатный, сыр «Моцарелла», сыр «Пармезан», ветчина, салями,
+            грибы.
+          </div>
+        </div>
+        <div class="card-buttons">
+          <button class="button button-primary button-add-cart">
+            <span class="button-card-text">В корзину</span>
+            <span class="button-cart-svg"></span>
+          </button>
+          <strong class="card-price-bold">510 ₽</strong>
+        </div>
+      </div>`);
+
+  cardsMenu.insertAdjacentElement('beforeend', card);
 }
 
 function openGoods(event) {
@@ -138,9 +163,13 @@ function openGoods(event) {
   const restaurant = target.closest('.card-restaurant'); // получаем родительский элемент <a></a>
 
   if (restaurant) {
+    cardsMenu.textContent = '';
+    
     containerPromo.classList.add('hide');
     restaurants.classList.add('hide');
     menu.classList.remove('hide');
+
+    createCardGood() // создаем карточки с меню
   }
 }
 
