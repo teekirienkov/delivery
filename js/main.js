@@ -19,7 +19,9 @@ const buttonAuth = document.querySelector('.button-auth'),
       passwordInput = document.querySelector('#password'),
       
       userName = document.querySelector('.user-name'),
-      buttonOut = document.querySelector('.button-out');
+      buttonOut = document.querySelector('.button-out'),
+
+      cardsRestaurants = document.querySelector('.cards-restaurants');
 
 let login = localStorage.getItem('login');
 
@@ -88,3 +90,33 @@ function checkAuth() {
   }
 }
 checkAuth();
+
+
+function createCardRestaurant() {
+  const card = `
+    <a href="restaurant.html" class="card card-restaurant">
+
+      <img src="img/tanuki/preview.jpg" alt="image" class="card-image"/>
+      <div class="card-text">
+
+        <div class="card-heading">
+          <h3 class="card-title">Тануки</h3>
+          <span class="card-tag tag">60 мин</span>
+        </div>
+
+        <div class="card-info">
+          <div class="rating">
+            4.5
+          </div>
+          <div class="price">От 1 200 ₽</div>
+          <div class="category">Суши, роллы</div>
+        </div>
+
+      </div>
+    </a>`;
+
+    // Этот метод работает быстрее чем innerHTML. Он не переписывает имеющуюся верстку
+    cardsRestaurants.insertAdjacentHTML()
+}
+
+createCardRestaurant()
