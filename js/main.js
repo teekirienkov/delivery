@@ -91,8 +91,6 @@ function checkAuth() {
     notAuthorized();
   }
 }
-checkAuth();
-
 
 function createCardRestaurant() {
   const card = `
@@ -116,7 +114,6 @@ function createCardRestaurant() {
     // Этот метод работает быстрее чем innerHTML. Он не переписывает имеющуюся верстку
     cardsRestaurants.insertAdjacentHTML('beforeend', card);
 }
-createCardRestaurant()
 
 function createCardGood() {
   const card = document.createElement('div');
@@ -161,15 +158,21 @@ function openGoods(event) {
   }
 }
 
-// Вешаем клик на весь блок с ресторанами, в функции openGoods делегирование события
-cardsRestaurants.addEventListener('click', openGoods);
-
-logo.addEventListener('click', function() {
+function openMainPage() {
   containerPromo.classList.remove('hide');
   restaurants.classList.remove('hide');
   menu.classList.add('hide');
-})
+}
 
+// Вешаем клик на весь блок с ресторанами, в функции openGoods делегирование события
+cardsRestaurants.addEventListener('click', openGoods);
+logo.addEventListener('click', openMainPage);
 // Модальное окно
 cartButton.addEventListener("click", toggleModal);
 close.addEventListener("click", toggleModal);
+
+
+checkAuth();
+
+createCardRestaurant();
+createCardRestaurant();
