@@ -23,6 +23,12 @@ const buttonAuth = document.querySelector('.button-auth'),
 
 let login = localStorage.getItem('login');
 
+const valid = function(str) {
+  const nameReg = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
+
+  return nameReg.test(str);
+}
+
 function toggleModal() {
   modal.classList.toggle("is-open");
 }
