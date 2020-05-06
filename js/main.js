@@ -46,14 +46,14 @@ function authorized() {
     buttonAuth.style.display = '';
     userName.style.display = '';
     buttonOut.style.display = '';
-    buttonOut.removeEventListener('click', exit)
+    buttonOut.removeEventListener('click', exit);
     checkAuth();
   }
-  buttonOut.addEventListener('click', exit)
+  buttonOut.addEventListener('click', exit);
 }
 
 function notAuthorized() {
-  console.log('No auth')
+  console.log('No auth');
 
   function logIn(event) {
     login = loginInput.value;
@@ -72,7 +72,7 @@ function notAuthorized() {
 
   function checkLengthLogin(event) {
     if (loginInput.value) {
-      logIn()
+      logIn();
     } else {
       event.preventDefault();
       alert('Введите логин!');
@@ -154,7 +154,7 @@ function openGoods(event) {
     restaurants.classList.add('hide');
     menu.classList.remove('hide');
 
-    createCardGood() // создаем карточки с меню
+    createCardGood(); // создаем карточки с меню
   }
 }
 
