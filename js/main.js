@@ -149,7 +149,6 @@ function openGoods(event) {
 
   if (restaurant) {
     cardsMenu.textContent = '';
-
     containerPromo.classList.add('hide');
     restaurants.classList.add('hide');
     menu.classList.remove('hide');
@@ -176,3 +175,9 @@ checkAuth();
 
 createCardRestaurant();
 createCardRestaurant();
+
+// ошибка скорее всего в верстке
+new Swiper('.swiper-container', {
+  loop: true,
+  autoplay: true
+});
