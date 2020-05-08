@@ -21,6 +21,7 @@ const cartButton = document.querySelector("#cart-button"),
 
       modalBody = document.querySelector('.modal-body'),
       modalPrice = document.querySelector('.modal-pricetag'),
+      buttonClearCart = document.querySelector('.clear-cart'),
 
       cardsMenu = document.querySelector('.cards-menu');
 
@@ -269,6 +270,11 @@ function init() {
     renderCart();
     toggleModal();
   });
+
+  buttonClearCart.addEventListener('click', () => {
+    cart.length = 0;
+    renderCart();
+  })
 
   // events
   // Вешаем клик на весь блок с ресторанами, в функции openGoods делегирование события
