@@ -149,11 +149,11 @@ function createCardGood(products) {
           </div>
         </div>
         <div class="card-buttons">
-          <button class="button button-primary button-add-cart">
+          <button class="button button-primary button-add-cart" id="${id}">
             <span class="button-card-text">В корзину</span>
             <span class="button-cart-svg"></span>
           </button>
-          <strong class="card-price-bold">${price} ₽</strong>
+          <strong class="card-price-bold card-prices">${price} ₽</strong>
         </div>
       </div>`);
   cardsMenu.insertAdjacentElement('beforeend', card);
@@ -183,8 +183,21 @@ function openMainPage() {
   menu.classList.add('hide');
 }
 
-function addToCard() {
+// add products in cart
+function addToCart(event) {
+  const target = event.target;
 
+  const buttonAddToCart = target.closest('.button-add-cart');
+
+  if (buttonAddToCart) {
+    const cart = target.closest('.card');
+    const title = cart.querySelector('.card-title-reg').textContent;
+    const cost = cart.querySelector('.card-prices').textContent;
+    const id = buttonAddToCart.id;
+    console.log(title, cost, id);
+
+    cart.push({});
+  }
 }
 
 function init() {
@@ -195,7 +208,7 @@ function init() {
   // Вешаем клик на весь блок с ресторанами, в функции openGoods делегирование события
   cardsRestaurants.addEventListener('click', openGoods);
 
-  cardsMenu.addEventListener('click', addToCard);
+  cardsMenu.addEventListener('click', addToCart);
 
   logo.addEventListener('click', openMainPage);
   // Модальное окно
