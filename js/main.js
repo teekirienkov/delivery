@@ -23,6 +23,10 @@ const cartButton = document.querySelector("#cart-button"),
 
 let login = localStorage.getItem('login');
 
+const getData = async function() {
+  
+}
+
 function toggleModal() {
   modal.classList.toggle("is-open");
 }
