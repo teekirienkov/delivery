@@ -19,6 +19,8 @@ const cartButton = document.querySelector("#cart-button"),
       menu = document.querySelector('.menu'),
       logo = document.querySelector('.logo'),
 
+      modalBody = document.querySelector('.modal-body'),
+
       cardsMenu = document.querySelector('.cards-menu');
 
 let login = localStorage.getItem('login');
@@ -199,22 +201,50 @@ function addToCart(event) {
 
     const food = cart.find((item) => item.id === id);
 
-    console.log(food);
 
-    cart.push({
-      id: id,
-      title: title,
-      cost: cost,
-      count: 1
-    });
-
-    console.log(cart);
+    // логика корзины, количество товаров
+    if (food) {
+      food.count += 1;
+    } else {
+      cart.push({
+        id,         // id: id,
+        title,      // title: title,
+        cost,       // cost: cost,
+        count: 1
+      });
+    }
   }
+}
+
+function renderCart() {
+  modalBody.textContent = '';
+  
+  // Деструктурируем сразу в скобках где получаем данные
+  cart.forEach(({ id, title, cost, count }) => {
+    const itemCart = `
+    <div class="food-row">
+      <span class="food-name">Ролл угорь стандарт</span>
+      <strong class="food-price">250 ₽</strong>
+
+        <div class="food-counter">
+          <button class="counter-button">-</button>
+          <span class="counter">1</span>
+          <button class="counter-button">+</button>
+        </div>
+    </div>`;
+    
+    modalBody.insertAdjacentHTML('afterbegin', itemCart);
+  });
 }
 
 function init() {
   getData('./db/partners.json')
   .then((data) => data.forEach(createCardRestaurant));
+
+  cartButton.addEventListener("click", () => {
+    renderCart();
+    toggleModal();
+  });
 
   // events
   // Вешаем клик на весь блок с ресторанами, в функции openGoods делегирование события
@@ -224,7 +254,7 @@ function init() {
 
   logo.addEventListener('click', openMainPage);
   // Модальное окно
-  cartButton.addEventListener("click", toggleModal);
+  
   close.addEventListener("click", toggleModal);
 
   checkAuth();
