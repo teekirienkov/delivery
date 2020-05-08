@@ -104,23 +104,24 @@ function checkAuth() {
   }
 }
 
+// рендерим карточки ресторанов на main page
 function createCardRestaurant(restaurant) {
   // Извлекаем из полученных данных цену и названия с помощью деструктуризации
-  const {price, name} = restaurant;
+  const { price, name, kitchen, stars, image, time_of_delivery: timeOfDelivery, products } = restaurant;
   const card = `
     <a href="#" class="card card-restaurant">
-      <img src="img/tanuki/preview.jpg" alt="image" class="card-image"/>
+      <img src="${image}" alt="image" class="card-image"/>
       <div class="card-text">
         <div class="card-heading">
-          <h3 class="card-title">${restaurant.}</h3>
-          <span class="card-tag tag">60 мин</span>
+          <h3 class="card-title">${name}</h3>
+          <span class="card-tag tag">${timeOfDelivery} минут</span>
         </div>
         <div class="card-info">
           <div class="rating">
-            4.5
+            ${stars}
           </div>
-          <div class="price">От 1 200 ₽</div>
-          <div class="category">Суши, роллы</div>
+          <div class="price">${price}</div>
+          <div class="category">${kitchen}</div>
         </div>
       </div>
     </a>`;
@@ -177,25 +178,28 @@ function openMainPage() {
   menu.classList.add('hide');
 }
 
-getData('./db/partners.json')
+function init() {
+  getData('./db/partners.json')
   .then((data) => data.forEach(createCardRestaurant))
 
-// Вешаем клик на весь блок с ресторанами, в функции openGoods делегирование события
-cardsRestaurants.addEventListener('click', openGoods);
-logo.addEventListener('click', openMainPage);
-// Модальное окно
-cartButton.addEventListener("click", toggleModal);
-close.addEventListener("click", toggleModal);
 
 
-checkAuth();
+  // events
+  // Вешаем клик на весь блок с ресторанами, в функции openGoods делегирование события
+  cardsRestaurants.addEventListener('click', openGoods);
+  logo.addEventListener('click', openMainPage);
+  // Модальное окно
+  cartButton.addEventListener("click", toggleModal);
+  close.addEventListener("click", toggleModal);
 
-createCardRestaurant();
-createCardRestaurant();
-createCardRestaurant();
 
-new Swiper('.swiper-container', {
-  loop: true,
-  autoplay: true
-});
+  checkAuth();
 
+
+  new Swiper('.swiper-container', {
+    loop: true,
+    autoplay: true
+  });
+}
+
+init();
