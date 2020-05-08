@@ -250,9 +250,13 @@ function changeCount(event) {
 
   if (target.classList.contains('counter-button')) {
     const food = cart.find((item) => item.id === target.dataset.id);
-    if (target.classList.contains('counter-minus')) food.count--;
+    if (target.classList.contains('counter-minus')) {
+      food.count--;
+      if (food.count === 0) {
+        cart.splice(cart.indexOf(food), 1); // исправление бага ухода в минус цены товара
+      }
+    }
     if (target.classList.contains('counter-plus')) food.count++;
-
     renderCart();
   }
 }
