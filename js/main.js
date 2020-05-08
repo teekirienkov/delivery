@@ -23,6 +23,8 @@ const cartButton = document.querySelector("#cart-button"),
 
 let login = localStorage.getItem('login');
 
+let cart = []; // корзина
+
 const getData = async function(url) {
   const response = await fetch(url)
   
@@ -153,7 +155,7 @@ function createCardGood(products) {
             <span class="button-card-text">В корзину</span>
             <span class="button-cart-svg"></span>
           </button>
-          <strong class="card-price-bold card-prices">${price} ₽</strong>
+          <strong class="card-price-bold card-price">${price} ₽</strong>
         </div>
       </div>`);
   cardsMenu.insertAdjacentElement('beforeend', card);
@@ -190,13 +192,23 @@ function addToCart(event) {
   const buttonAddToCart = target.closest('.button-add-cart');
 
   if (buttonAddToCart) {
-    const cart = target.closest('.card');
-    const title = cart.querySelector('.card-title-reg').textContent;
-    const cost = cart.querySelector('.card-prices').textContent;
+    const card = target.closest('.card');
+    const title = card.querySelector('.card-title-reg').textContent;
+    const cost = card.querySelector('.card-price').textContent;
     const id = buttonAddToCart.id;
-    console.log(title, cost, id);
 
-    cart.push({});
+    const food = cart.find((item) => item.id === id);
+
+    console.log(food);
+
+    cart.push({
+      id: id,
+      title: title,
+      cost: cost,
+      count: 1
+    });
+
+    console.log(cart);
   }
 }
 
