@@ -155,7 +155,6 @@ function createCardGood(products) {
           <strong class="card-price-bold">${price} ₽</strong>
         </div>
       </div>`);
-
   cardsMenu.insertAdjacentElement('beforeend', card);
 }
 
