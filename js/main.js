@@ -223,18 +223,22 @@ function renderCart() {
   cart.forEach(({ id, title, cost, count }) => {
     const itemCart = `
     <div class="food-row">
-      <span class="food-name">Ролл угорь стандарт</span>
-      <strong class="food-price">250 ₽</strong>
+      <span class="food-name">${title}</span>
+      <strong class="food-price">${cost}</strong>
 
         <div class="food-counter">
           <button class="counter-button">-</button>
-          <span class="counter">1</span>
+          <span class="counter">${count}</span>
           <button class="counter-button">+</button>
         </div>
     </div>`;
-    
+
     modalBody.insertAdjacentHTML('afterbegin', itemCart);
   });
+
+  const totalPrice = cart.reduce((result, item) => {
+    return result + item.cost;
+  }, 0);
 }
 
 function init() {
