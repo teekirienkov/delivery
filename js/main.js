@@ -228,9 +228,9 @@ function renderCart() {
       <strong class="food-price">${cost}</strong>
 
         <div class="food-counter">
-          <button class="counter-button">-</button>
+          <button class="counter-button counter-minus" data-id="${id}">-</button>
           <span class="counter">${count}</span>
-          <button class="counter-button">+</button>
+          <button class="counter-button counter-plus" data-id="${id}">+</button>
         </div>
     </div>`;
 
@@ -242,6 +242,22 @@ function renderCart() {
   }, 0);
 
   modalPrice.textContent = `${totalPrice} ₽`;
+}
+
+// function change count products 
+function changeCount(event) {
+  const target = event.target;
+
+  if (target.classList.contains('counter-minus')) {
+    const food = cart.find((item) => item.id === target.dataset.id);
+    food.count--;
+    renderCart();
+  }
+  if (target.classList.contains('counter-plus')) {
+    const food = cart.find((item) => item.id === target.dataset.id);
+    food.count++;
+    renderCart();
+  }
 }
 
 function init() {
@@ -258,6 +274,8 @@ function init() {
   cardsRestaurants.addEventListener('click', openGoods);
 
   cardsMenu.addEventListener('click', addToCart);
+
+  modalBody.addEventListener('click', changeCount);
 
   logo.addEventListener('click', openMainPage);
   // Модальное окно
