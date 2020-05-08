@@ -1,0 +1,19 @@
+{
+  "name": "delivery-clone",
+  "version": "1.1.0",
+  "description": "<h1>Delivery</h1>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/teekirienkov/delivery.git"
+  },
+  "author": "Timur Kirienkov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teekirienkov/delivery/issues"
+  },
+  "homepage": "https://github.com/teekirienkov/delivery#readme"
+}
