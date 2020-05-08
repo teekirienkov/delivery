@@ -45,7 +45,8 @@ function authorized() {
   console.log('Auth');
   buttonAuth.style.display = 'none';
   userName.style.display = 'inline';
-  buttonOut.style.display = 'block';
+  buttonOut.style.display = 'flex';
+  cartButton.style.display = 'flex';
 
   userName.textContent = login;
 
@@ -182,23 +183,26 @@ function openMainPage() {
   menu.classList.add('hide');
 }
 
+function addToCard() {
+
+}
+
 function init() {
   getData('./db/partners.json')
   .then((data) => data.forEach(createCardRestaurant));
 
-
-
   // events
   // Вешаем клик на весь блок с ресторанами, в функции openGoods делегирование события
   cardsRestaurants.addEventListener('click', openGoods);
+
+  cardsMenu.addEventListener('click', addToCard);
+
   logo.addEventListener('click', openMainPage);
   // Модальное окно
   cartButton.addEventListener("click", toggleModal);
   close.addEventListener("click", toggleModal);
 
-
   checkAuth();
-
 
   new Swiper('.swiper-container', {
     loop: true,
