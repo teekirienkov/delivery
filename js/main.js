@@ -24,11 +24,14 @@ const cartButton = document.querySelector("#cart-button"),
 let login = localStorage.getItem('login');
 
 const getData = async function(url) {
-  const response = fetch(url)
-  console.log(response)
-}
+  const response = await fetch(url)
+  
+  if (!response.ok) {
+    throw new Error(`Error url: ${url}, status error: ${response.status}`)
+  }
 
-getData('./db/partners.json');
+  return await response.json();
+}
 
 function toggleModal() {
   modal.classList.toggle("is-open");
@@ -101,13 +104,15 @@ function checkAuth() {
   }
 }
 
-function createCardRestaurant() {
+function createCardRestaurant(restaurant) {
+  // Извлекаем из полученных данных цену и названия с помощью деструктуризации
+  const {price, name} = restaurant;
   const card = `
     <a href="#" class="card card-restaurant">
       <img src="img/tanuki/preview.jpg" alt="image" class="card-image"/>
       <div class="card-text">
         <div class="card-heading">
-          <h3 class="card-title">Тануки</h3>
+          <h3 class="card-title">${restaurant.}</h3>
           <span class="card-tag tag">60 мин</span>
         </div>
         <div class="card-info">
@@ -172,6 +177,9 @@ function openMainPage() {
   menu.classList.add('hide');
 }
 
+getData('./db/partners.json')
+  .then((data) => data.forEach(createCardRestaurant))
+
 // Вешаем клик на весь блок с ресторанами, в функции openGoods делегирование события
 cardsRestaurants.addEventListener('click', openGoods);
 logo.addEventListener('click', openMainPage);
@@ -190,3 +198,4 @@ new Swiper('.swiper-container', {
   loop: true,
   autoplay: true
 });
+
