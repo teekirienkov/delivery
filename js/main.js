@@ -20,6 +20,7 @@ const cartButton = document.querySelector("#cart-button"),
       logo = document.querySelector('.logo'),
 
       modalBody = document.querySelector('.modal-body'),
+      modalPrice = document.querySelector('.modal-pricetag'),
 
       cardsMenu = document.querySelector('.cards-menu');
 
@@ -237,8 +238,10 @@ function renderCart() {
   });
 
   const totalPrice = cart.reduce((result, item) => {
-    return result + item.cost;
+    return result + parseFloat(item.cost);
   }, 0);
+
+  modalPrice.textContent = totalPrice;
 }
 
 function init() {
