@@ -238,10 +238,10 @@ function renderCart() {
   });
 
   const totalPrice = cart.reduce((result, item) => {
-    return result + parseFloat(item.cost);
+    return result + (parseFloat(item.cost) * item.count); // получаем итоговую цену
   }, 0);
 
-  modalPrice.textContent = totalPrice;
+  modalPrice.textContent = `${totalPrice} ₽`;
 }
 
 function init() {
