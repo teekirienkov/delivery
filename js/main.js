@@ -23,17 +23,20 @@ const cartButton = document.querySelector("#cart-button"),
 
 let login = localStorage.getItem('login');
 
-const getData = async function() {
-  console.log('test')
+const getData = async function(url) {
+  const response = fetch(url)
+  console.log(response)
 }
+
+getData('./db/partners.json');
 
 function toggleModal() {
   modal.classList.toggle("is-open");
-}
+};
 
 function toggleModalAuth() {
   modalAuth.classList.toggle('is-open');
-}
+};
 
 function authorized() {
   console.log('Auth');
@@ -56,7 +59,7 @@ function authorized() {
     openMainPage();
   }
   buttonOut.addEventListener('click', exit);
-}
+};
 
 function notAuthorized() {
   console.log('No auth');
@@ -88,7 +91,7 @@ function notAuthorized() {
   buttonAuth.addEventListener('click', toggleModalAuth);
   closeAuth.addEventListener('click', toggleModalAuth);
   logInForm.addEventListener('submit', checkLengthLogin);
-}
+};
 
 function checkAuth() {
   if (login) {
