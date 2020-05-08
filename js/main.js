@@ -24,7 +24,7 @@ const cartButton = document.querySelector("#cart-button"),
 let login = localStorage.getItem('login');
 
 const getData = async function() {
-  
+  console.log('test')
 }
 
 function toggleModal() {
