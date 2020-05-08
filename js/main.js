@@ -248,14 +248,11 @@ function renderCart() {
 function changeCount(event) {
   const target = event.target;
 
-  if (target.classList.contains('counter-minus')) {
+  if (target.classList.contains('counter-button')) {
     const food = cart.find((item) => item.id === target.dataset.id);
-    food.count--;
-    renderCart();
-  }
-  if (target.classList.contains('counter-plus')) {
-    const food = cart.find((item) => item.id === target.dataset.id);
-    food.count++;
+    if (target.classList.contains('counter-minus')) food.count--;
+    if (target.classList.contains('counter-plus')) food.count++;
+
     renderCart();
   }
 }
